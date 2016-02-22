@@ -17,12 +17,20 @@ class armModuleFrame(object):
     """
     def __init__(self, inst):
         self.armModuleFrame = pm.frameLayout( parent = inst.simpleSetup_layout, w =244, label='simpleArm', borderStyle='out', cll = True, cl = True )
-        self.conTChkBoxGRP = pm.checkBoxGrp( parent = self.armModuleFrame, cw = ( [ 1, 78 ], [ 2, 78 ], [ 3, 78 ] ), numberOfCheckBoxes=3, labelArray3=['Translate X', 'Translate Y', 'Translate Z'], v1 = 1, v2 = 1, v3 =  1 )
-        self.conRChkBoxGRP = pm.checkBoxGrp( parent = self.armModuleFrame, cw = ( [ 1, 78 ], [ 2, 78 ], [ 3, 78 ] ),numberOfCheckBoxes=3, labelArray3=['Rotate X', 'Rotate Y', 'Rotate Z'], v1 = 1, v2 = 1, v3 =  1 )
-        self.conSChkBoxGRP = pm.checkBoxGrp( parent = self.armModuleFrame, cw = ( [ 1, 78 ], [ 2, 78 ], [ 3, 78 ] ),numberOfCheckBoxes=3, labelArray3=['Scale X', 'Scale Y', 'Scale Z'], v1 = 1, v2 = 1, v3 =  1 )
-        self.conVChkBox = pm.checkBox( parent = self.armModuleFrame, label='Visibility', v = 1 )
-        self.conTX_Btn = pm.button(parent = self.armModuleFrame, w = 244, h = 24, label="Build simple Arm Module", command = self.build_armMod)
+        self.armSide_RBGRP = pm.radioButtonGrp( label='Choose Arm Side', labelArray3=['Left', 'Center', 'Right'], numberOfRadioButtons=3 )
+        self.armSpace_RBGRP = pm.radioButtonGrp( label='Choose Arm Space', labelArray3=['Top', 'Middle', 'Bottom'], numberOfRadioButtons=3 )
+        self.armAttribute_ChkBoxGRP = pm.checkBoxGrp( parent = self.armModuleFrame, label = 'Arm Attributes   ', cw = ( [ 1, 90 ], [ 2, 70 ], [ 3, 100 ], [ 4, 60 ] ),numberOfCheckBoxes=3, labelArray3=['Stretchy', 'Elbow Pinning', 'Bendy Arms'], v1 = 1, v2 = 1, v3 =  1 )
+        
+        self.armModulebutton_layout = pm.rowColumnLayout(parent = self.armModuleFrame, nc = 3 )
+        self.buildArm_Btn = pm.button(parent = self.armModulebutton_layout, w = 120, h = 24, label="Build Arm", command = self.build_armMod)
+        self.mirrorArm_Btn = pm.button( parent = self.armModulebutton_layout, w = 120, h = 24, label = 'Mirror Arm', c = self.exe_MirrorArm )
+        self.collapseArmModule_Btn = pm.button( parent = self.armModulebutton_layout, w = 120, h = 24, label = 'Collapse Arm Module', c = self.exe_collapseArmModule )
         
     def build_armMod(self, *args):
         print "Yay! You've built an arm module!"
-    
+
+    def exe_MirrorArm(self, *args):
+        print "Yay! You've mirrored the arm module!"  
+        
+    def exe_collapseArmModule(self, *args):
+        print "Yay! You've collapsed the arm module!" 
